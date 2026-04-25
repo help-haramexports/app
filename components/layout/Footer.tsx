@@ -1,47 +1,48 @@
-import Link from 'next/link';
+import Link from "next/link";
+import type { ShopifyMenuItem } from "@/lib/shopify";
 
-// Default Fallback Menus (Agar Shopify se data aane mein deri ho)
-const defaultShopLinks = [
-  { title: 'Professional Saddles', url: '/collections/saddles' },
-  { title: 'Riding Jackets', url: '/collections/jackets' },
-  { title: 'Horse Accessories', url: '/collections/accessories' }
+const defaultShopLinks: ShopifyMenuItem[] = [
+  { title: "Professional Saddles", url: "/collections/saddles" },
+  { title: "Riding Jackets", url: "/collections/jackets" },
+  { title: "Horse Accessories", url: "/collections/accessories" },
 ];
 
-const defaultLegalLinks = [
-  { title: 'Terms of Service', url: '/policies/terms-of-service' },
-  { title: 'Privacy Policy', url: '/policies/privacy-policy' },
-  { title: 'Refund Policy', url: '/policies/refund-policy' },
-  { title: 'Contact Information', url: '/contact' }
+const defaultLegalLinks: ShopifyMenuItem[] = [
+  { title: "Terms of Service", url: "/policies/terms-of-service" },
+  { title: "Privacy Policy", url: "/policies/privacy-policy" },
+  { title: "Refund Policy", url: "/policies/refund-policy" },
+  { title: "Contact Information", url: "/contact" },
 ];
 
-// Ab Footer do menus accept karega: 'shopLinks' aur 'legalLinks'
-export default function Footer({ 
-  shopLinks = defaultShopLinks, 
-  legalLinks = defaultLegalLinks 
-}: { 
-  shopLinks?: { title: string, url: string }[],
-  legalLinks?: { title: string, url: string }[] 
-}) {
+type FooterProps = {
+  shopLinks?: ShopifyMenuItem[];
+  legalLinks?: ShopifyMenuItem[];
+};
+
+export default function Footer({
+  shopLinks = defaultShopLinks,
+  legalLinks = defaultLegalLinks,
+}: FooterProps) {
   return (
-    <footer className="bg-gray-50 border-t border-gray-200 pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          
-          {/* Column 1: Brand Info */}
-          <div className="col-span-1 md:col-span-1">
-            <h3 className="text-xl font-extrabold text-gray-900 mb-4 tracking-tighter">HARAM EXPORTS</h3>
-            <p className="text-gray-500 text-sm leading-relaxed">
-              Premium handcrafted equestrian gear, saddles, and accessories. A proud entity of Malik Innovations, delivering global excellence directly from Kanpur, India.
+    <footer className="border-t border-gray-200 bg-gray-50 pb-8 pt-16">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mb-12 grid grid-cols-1 gap-12 md:grid-cols-4">
+          <div>
+            <h3 className="mb-4 text-xl font-extrabold tracking-tight text-gray-900">
+              HARAM EXPORTS
+            </h3>
+            <p className="text-sm leading-relaxed text-gray-500">
+              Premium handcrafted equestrian gear, saddles, and accessories from
+              Kanpur, India, built for global retail and wholesale partners.
             </p>
           </div>
 
-          {/* Column 2: Quick Links (Dynamic) */}
           <div>
-            <h4 className="font-semibold text-gray-900 mb-4">Shop</h4>
+            <h4 className="mb-4 font-semibold text-gray-900">Shop</h4>
             <ul className="space-y-3 text-sm text-gray-500">
-              {shopLinks.map((link, index) => (
-                <li key={index}>
-                  <Link href={link.url} className="hover:text-black transition">
+              {shopLinks.map((link) => (
+                <li key={`${link.title}-${link.url}`}>
+                  <Link href={link.url} className="transition hover:text-black">
                     {link.title}
                   </Link>
                 </li>
@@ -49,13 +50,12 @@ export default function Footer({
             </ul>
           </div>
 
-          {/* Column 3: Legal & Support (Dynamic) */}
           <div>
-            <h4 className="font-semibold text-gray-900 mb-4">Legal & Support</h4>
+            <h4 className="mb-4 font-semibold text-gray-900">Legal & Support</h4>
             <ul className="space-y-3 text-sm text-gray-500">
-              {legalLinks.map((link, index) => (
-                <li key={index}>
-                  <Link href={link.url} className="hover:text-black transition">
+              {legalLinks.map((link) => (
+                <li key={`${link.title}-${link.url}`}>
+                  <Link href={link.url} className="transition hover:text-black">
                     {link.title}
                   </Link>
                 </li>
@@ -63,27 +63,34 @@ export default function Footer({
             </ul>
           </div>
 
-          {/* Column 4: Newsletter */}
           <div>
-            <h4 className="font-semibold text-gray-900 mb-4">Subscribe</h4>
-            <p className="text-gray-500 text-sm mb-4">Get the latest updates on new products and global sales.</p>
-            <div className="flex">
-              <input type="email" placeholder="Email address" className="px-4 py-2 w-full border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-gray-900" />
-              <button className="bg-gray-900 text-white px-4 py-2 rounded-r-md hover:bg-gray-800 transition">
-                &rarr;
-              </button>
+            <h4 className="mb-4 font-semibold text-gray-900">Need Help?</h4>
+            <p className="mb-4 text-sm text-gray-500">
+              Need pricing, custom branding, or a wholesale catalog? Start with the
+              business pages below.
+            </p>
+            <div className="flex flex-col gap-3">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-full bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-gray-800"
+              >
+                Contact Sales
+              </Link>
+              <Link
+                href="/about"
+                className="inline-flex items-center justify-center rounded-full border border-gray-300 px-4 py-2.5 text-sm font-semibold text-gray-900 transition hover:border-gray-900"
+              >
+                Our Story
+              </Link>
             </div>
           </div>
-
         </div>
 
-        <div className="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-xs">
-            &copy; {new Date().getFullYear()} Haram Exports (Malik Innovations). All rights reserved.
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-8 md:flex-row">
+          <p className="text-xs text-gray-400">
+            &copy; {new Date().getFullYear()} Haram Exports. All rights reserved.
           </p>
-          <div className="mt-4 md:mt-0 text-gray-400 text-xs">
-            Powered by Next.js & Shopify Headless
-          </div>
+          <div className="text-xs text-gray-400">Powered by Next.js and Shopify Headless</div>
         </div>
       </div>
     </footer>

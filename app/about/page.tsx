@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About | Haram Exports",
   description:
-    "Learn about Haram Exports, our leather craftsmanship, and our B2B export approach.",
+    "Learn about Haram Exports, our leather craftsmanship, and our retail storefront approach.",
 };
 
 export default function AboutPage() {
@@ -16,11 +16,11 @@ export default function AboutPage() {
             About Haram Exports
           </span>
           <h1 className="mt-4 max-w-4xl text-4xl font-extrabold tracking-tight text-gray-900 md:text-5xl">
-            Handcrafted equestrian products shaped in Kanpur for a global export market.
+            Handcrafted equestrian products shaped in Kanpur for riders around the world.
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-gray-600">
             We combine deep leather-making experience with modern product standards
-            so retailers and riding businesses can source premium gear with confidence.
+            so riders can shop premium gear with confidence across mobile and desktop.
           </p>
         </div>
       </section>
@@ -37,24 +37,24 @@ export default function AboutPage() {
 
           <div className="space-y-6">
             <h2 className="text-3xl font-extrabold text-gray-900">
-              Built around quality, repeatability, and long-term partnerships.
+              Built around quality, comfort, and everyday riding confidence.
             </h2>
             <p className="leading-relaxed text-gray-600">
               From saddle construction to leather finishing, every stage is focused on
-              consistency. That matters for riders, but it matters even more for stores
-              and distributors managing reorder confidence.
+              consistency. That matters for every rider who expects dependable feel,
+              finish, and long-lasting performance.
             </p>
             <p className="leading-relaxed text-gray-600">
               Our product development process is shaped around fit, durability, and
-              presentation, while our export workflow is designed to support wholesale
-              planning, private-label programs, and market-specific assortments.
+              presentation, while our Shopify-powered storefront keeps shopping,
+              account access, and order updates simple for customers.
             </p>
             <div className="grid gap-4 sm:grid-cols-2">
               {[
                 "Handcrafted leather production",
-                "Wholesale and export friendly",
-                "Custom branding support",
-                "Catalog-driven product presentation",
+                "Shopify-managed customer accounts",
+                "Live retail catalog",
+                "Responsive mobile shopping",
               ].map((item) => (
                 <div
                   key={item}
@@ -71,11 +71,10 @@ export default function AboutPage() {
       <section className="bg-gray-900 py-16 text-white sm:py-20">
         <div className="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="text-3xl font-extrabold sm:text-4xl">
-            Ready to source for your next retail or wholesale program?
+            Ready to explore the latest collection?
           </h2>
           <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-gray-300">
-            Browse the live catalog or move straight to the inquiry flow for pricing
-            and assortment planning.
+            Browse the live catalog, search products, or jump into your customer account.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
             <Link
@@ -85,10 +84,10 @@ export default function AboutPage() {
               Browse Catalog
             </Link>
             <Link
-              href="/contact"
+              href="/account"
               className="rounded-full border border-white px-6 py-3 font-semibold text-white transition hover:bg-white hover:text-gray-900"
             >
-              Contact Sales
+              My Account
             </Link>
           </div>
         </div>

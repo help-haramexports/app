@@ -43,11 +43,11 @@ export default function CollectionsLandingPage() {
             Collections
           </span>
           <h1 className="mt-4 max-w-3xl text-4xl font-extrabold tracking-tight text-gray-900 md:text-5xl">
-            A headless Shopify catalog built for riders, retailers, and distributors.
+            A headless Shopify catalog built for riders who want a clean retail shopping experience.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-600">
             Explore the core product families and jump directly into the collections
-            that matter most to your buyers.
+            that matter most to your riding style.
           </p>
         </div>
       </section>

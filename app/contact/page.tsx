@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contact | Haram Exports",
   description:
-    "Wholesale inquiries, product sourcing guidance, and catalog support for Haram Exports.",
+    "Customer support, shopping help, and product guidance for Haram Exports.",
 };
 
 export default function ContactPage() {
@@ -13,14 +13,14 @@ export default function ContactPage() {
       <section className="border-b border-gray-200 bg-gray-50 py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <span className="text-xs font-bold uppercase tracking-[0.3em] text-gray-500">
-            Contact Sales
+            Customer Support
           </span>
           <h1 className="mt-4 max-w-4xl text-4xl font-extrabold tracking-tight text-gray-900 md:text-5xl">
-            Start the conversation for catalog access, wholesale pricing, or custom programs.
+            Need help with shopping, sizing, policies, or your order?
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-gray-600">
-            The fastest inquiries include the product category, expected quantity,
-            target market, and any branding or packaging requirements.
+            This headless storefront keeps your catalog fast, while Shopify continues
+            to handle customer accounts, orders, and checkout securely.
           </p>
         </div>
       </section>
@@ -29,19 +29,19 @@ export default function ContactPage() {
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-3 lg:px-8">
           {[
             {
-              title: "Wholesale Catalog Requests",
+              title: "Order Support",
               description:
-                "Share the categories you are evaluating so the team can respond with the most relevant range.",
+                "Use your Shopify customer account to review order details, shipping progress, and saved addresses.",
             },
             {
-              title: "Private Label and Customization",
+              title: "Sizing and Product Help",
               description:
-                "Mention logos, finish changes, packaging needs, or market-specific styling requirements.",
+                "Browse the product catalog for descriptions, materials, and live availability before checkout.",
             },
             {
-              title: "Sampling and Shipping Guidance",
+              title: "Shipping and Policies",
               description:
-                "Include delivery country, lead-time expectations, and whether you need sample-first sourcing.",
+                "Policy pages and Shopify checkout keep shipping, returns, and privacy information clear.",
             },
           ].map((item) => (
             <div
@@ -57,13 +57,13 @@ export default function ContactPage() {
 
       <section className="pb-16 sm:pb-20">
         <div className="mx-auto max-w-5xl rounded-3xl bg-gray-900 px-6 py-12 text-white sm:px-10">
-          <h2 className="text-3xl font-extrabold">What to include in your inquiry</h2>
+          <h2 className="text-3xl font-extrabold">Where to manage customer actions</h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
             {[
-              "Product family or preferred collection",
-              "Approximate order quantity",
-              "Target country or delivery region",
-              "Private label or branding requirements",
+              "Registration through Shopify customer accounts",
+              "Order history inside your account page",
+              "Live product listing from Shopify",
+              "Checkout and payments in Shopify",
             ].map((item) => (
               <div
                 key={item}
@@ -75,16 +75,16 @@ export default function ContactPage() {
           </div>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Link
-              href="/collections/all"
+              href="/account"
               className="rounded-full bg-white px-6 py-3 text-center font-semibold text-gray-900 transition hover:bg-gray-100"
             >
-              Review the Catalog
+              Open My Account
             </Link>
             <Link
-              href="/policies/terms-of-service"
+              href="/search"
               className="rounded-full border border-white px-6 py-3 text-center font-semibold text-white transition hover:bg-white hover:text-gray-900"
             >
-              Read Business Terms
+              Search Products
             </Link>
           </div>
         </div>

@@ -41,13 +41,26 @@ const productCardFields = `
       }
     }
   }
+  variants(first: 1) {
+    edges {
+      node {
+        id
+        title
+        availableForSale
+        price {
+          amount
+          currencyCode
+        }
+      }
+    }
+  }
 `;
 
 async function getCollection(handle: string): Promise<CollectionViewModel | null> {
   if (handle === "all") {
     const query = `
       query getAllProducts {
-        products(first: 12, sortKey: UPDATED_AT, reverse: true) {
+        products(first: 16, sortKey: UPDATED_AT, reverse: true) {
           edges {
             node {
               ${productCardFields}
@@ -90,7 +103,7 @@ async function getCollection(handle: string): Promise<CollectionViewModel | null
           url
           altText
         }
-        products(first: 12, sortKey: BEST_SELLING) {
+        products(first: 16, sortKey: BEST_SELLING) {
           edges {
             node {
               ${productCardFields}
@@ -123,7 +136,7 @@ async function getCollection(handle: string): Promise<CollectionViewModel | null
       handle: collection.handle,
       description:
         collection.description ||
-        "Premium equestrian gear crafted for everyday training and retail programs.",
+        "Premium equestrian gear crafted for everyday training and retail shopping.",
       image: collection.image,
       products: collection.products.edges.map(({ node }) => node),
     };
@@ -176,7 +189,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
               <span className="text-gray-900">{collection.title}</span>
             </nav>
             <span className="mb-4 text-xs font-bold uppercase tracking-[0.28em] text-gray-500">
-              Curated Product Range
+              Live Shopify Collection
             </span>
             <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 md:text-5xl">
               {collection.title}
@@ -186,16 +199,16 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
-                href="/contact"
+                href="/cart"
                 className="rounded-full bg-gray-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-gray-800"
               >
-                Request Wholesale Pricing
+                View Cart
               </Link>
               <Link
-                href="/collections/all"
+                href="/search"
                 className="rounded-full border border-gray-300 px-6 py-3 text-sm font-semibold text-gray-900 transition hover:border-gray-900"
               >
-                Browse Full Catalog
+                Search Products
               </Link>
             </div>
           </div>
@@ -214,7 +227,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
                     Haram Exports
                   </p>
                   <p className="mt-4 text-2xl font-bold text-gray-900">
-                    Handcrafted leather products built for the global riding market.
+                    Handcrafted leather products built for riders around the world.
                   </p>
                 </div>
               </div>
@@ -235,15 +248,15 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
               </p>
             </div>
             <Link
-              href="/about"
+              href="/account"
               className="text-sm font-semibold text-gray-600 transition hover:text-gray-900"
             >
-              Learn more about our manufacturing approach
+              Manage account and orders
             </Link>
           </div>
 
           {collection.products.length > 0 ? (
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-2 gap-4 sm:gap-6 xl:grid-cols-3">
               {collection.products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}

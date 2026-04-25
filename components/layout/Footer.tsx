@@ -33,7 +33,7 @@ export default function Footer({
             </h3>
             <p className="text-sm leading-relaxed text-gray-500">
               Premium handcrafted equestrian gear, saddles, and accessories from
-              Kanpur, India, built for global retail and wholesale partners.
+              Kanpur, India, designed for everyday riders and modern online shopping.
             </p>
           </div>
 
@@ -51,7 +51,7 @@ export default function Footer({
           </div>
 
           <div>
-            <h4 className="mb-4 font-semibold text-gray-900">Legal & Support</h4>
+            <h4 className="mb-4 font-semibold text-gray-900">Support</h4>
             <ul className="space-y-3 text-sm text-gray-500">
               {legalLinks.map((link) => (
                 <li key={`${link.title}-${link.url}`}>
@@ -64,23 +64,23 @@ export default function Footer({
           </div>
 
           <div>
-            <h4 className="mb-4 font-semibold text-gray-900">Need Help?</h4>
+            <h4 className="mb-4 font-semibold text-gray-900">Customer Care</h4>
             <p className="mb-4 text-sm text-gray-500">
-              Need pricing, custom branding, or a wholesale catalog? Start with the
-              business pages below.
+              Shopping, registration, order tracking, and checkout stay connected to
+              Shopify for a smooth retail experience.
             </p>
             <div className="flex flex-col gap-3">
               <Link
-                href="/contact"
+                href="/account"
                 className="inline-flex items-center justify-center rounded-full bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-gray-800"
               >
-                Contact Sales
+                My Account
               </Link>
               <Link
-                href="/about"
+                href="/search"
                 className="inline-flex items-center justify-center rounded-full border border-gray-300 px-4 py-2.5 text-sm font-semibold text-gray-900 transition hover:border-gray-900"
               >
-                Our Story
+                Search Products
               </Link>
             </div>
           </div>

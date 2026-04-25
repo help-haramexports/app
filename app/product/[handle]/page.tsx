@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Gallery from "@/components/product/Gallery";
+import ProductActions from "@/components/product/ProductActions";
 import { formatMoney, shopifyFetch, type ShopifyProduct } from "@/lib/shopify";
 
 type ProductPageProps = {
@@ -34,6 +35,19 @@ async function getProduct(handle: string): Promise<ShopifyProduct | null> {
             node {
               url
               altText
+            }
+          }
+        }
+        variants(first: 1) {
+          edges {
+            node {
+              id
+              title
+              availableForSale
+              price {
+                amount
+                currencyCode
+              }
             }
           }
         }
@@ -91,6 +105,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const hasRichDescription = Boolean(product.descriptionHtml);
   const fallbackDescription =
     product.description || "Details for this product will be updated shortly.";
+  const firstVariant = product.variants?.edges[0]?.node;
 
   return (
     <div className="min-h-screen bg-white">
@@ -123,7 +138,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 )}
               </span>
               <span className="rounded-full bg-gray-900 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white">
-                Premium Leather
+                Ready to Ship
               </span>
             </div>
 
@@ -141,20 +156,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
               )}
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center rounded-lg bg-gray-900 px-6 py-4 text-center font-bold text-white transition-all hover:bg-gray-800"
-              >
-                Request a Quote
-              </Link>
-              <Link
-                href="/collections/all"
-                className="inline-flex items-center justify-center rounded-lg border-2 border-gray-900 px-6 py-4 text-center font-bold text-gray-900 transition-all hover:bg-gray-50"
-              >
-                Browse More Products
-              </Link>
-            </div>
+            <ProductActions
+              variantId={firstVariant?.id}
+              availableForSale={firstVariant?.availableForSale}
+            />
 
             <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
               {[
@@ -163,8 +168,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   description: "Reliable dispatch through export-focused logistics partners.",
                 },
                 {
-                  title: "Private Label Ready",
-                  description: "Bulk programs, custom branding, and catalog support available.",
+                  title: "Shopify Account Support",
+                  description: "Customer login, saved details, and order history are managed in Shopify.",
                 },
               ].map((item) => (
                 <div

@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ScrollToTop from "@/components/layout/ScrollToTop";
+import { CartProvider } from "@/components/providers/CartProvider";
 import {
   normalizeShopifyPath,
   shopifyFetch,
@@ -19,7 +20,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Haram Exports | Premium Equestrian Gear",
   description:
-    "Global manufacturer of high-quality handcrafted saddles, jackets, and horse riding accessories.",
+    "Shop handcrafted saddles, riding jackets, and equestrian accessories in a fast Shopify headless storefront.",
 };
 
 async function getShopifyMenu(handle: string): Promise<ShopifyMenuItem[] | null> {
@@ -79,13 +80,15 @@ export default async function RootLayout({
       <body
         className={`${inter.variable} ${inter.className} flex min-h-screen flex-col overflow-x-hidden bg-white text-gray-900 antialiased`}
       >
-        <Navbar menuItems={mainMenuItems || undefined} />
-        <main className="flex-grow">{children}</main>
-        <Footer
-          shopLinks={shopMenuItems || undefined}
-          legalLinks={legalMenuItems || undefined}
-        />
-        <ScrollToTop />
+        <CartProvider>
+          <Navbar menuItems={mainMenuItems || undefined} />
+          <main className="flex-grow">{children}</main>
+          <Footer
+            shopLinks={shopMenuItems || undefined}
+            legalLinks={legalMenuItems || undefined}
+          />
+          <ScrollToTop />
+        </CartProvider>
       </body>
     </html>
   );

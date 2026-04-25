@@ -5,6 +5,13 @@ const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN
   .replace(/\/$/, "");
 const storefrontAccessToken = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
+export const shopifyStoreDomain = domain ?? "";
+export const shopifyStoreUrl = domain ? `https://${domain}` : "";
+export const shopifyStorefrontApiUrl = domain
+  ? `https://${domain}/api/${apiVersion}/graphql.json`
+  : "";
+export const shopifyStorefrontAccessToken = storefrontAccessToken ?? "";
+
 export type ShopifyMenuItem = {
   title: string;
   url: string;
@@ -18,6 +25,14 @@ export type ShopifyImage = {
 export type ShopifyMoney = {
   amount: string;
   currencyCode: string;
+};
+
+export type ShopifyProductVariant = {
+  id: string;
+  title: string;
+  availableForSale: boolean;
+  price: ShopifyMoney;
+  image?: ShopifyImage | null;
 };
 
 export type ShopifyProduct = {
@@ -34,6 +49,11 @@ export type ShopifyProduct = {
       node: ShopifyImage;
     }>;
   };
+  variants?: {
+    edges: Array<{
+      node: ShopifyProductVariant;
+    }>;
+  };
 };
 
 export type ShopifyCollection = {
@@ -45,6 +65,36 @@ export type ShopifyCollection = {
   products: {
     edges: Array<{
       node: ShopifyProduct;
+    }>;
+  };
+};
+
+export type ShopifyCartLine = {
+  id: string;
+  quantity: number;
+  merchandise: {
+    id: string;
+    title: string;
+    price: ShopifyMoney;
+    image?: ShopifyImage | null;
+    product: {
+      title: string;
+      handle: string;
+    };
+  };
+};
+
+export type ShopifyCart = {
+  id: string;
+  checkoutUrl: string;
+  totalQuantity: number;
+  cost: {
+    subtotalAmount: ShopifyMoney;
+    totalAmount: ShopifyMoney;
+  };
+  lines: {
+    edges: Array<{
+      node: ShopifyCartLine;
     }>;
   };
 };
@@ -81,8 +131,7 @@ export async function shopifyFetch<
     );
   }
 
-  const endpoint = `https://${domain}/api/${apiVersion}/graphql.json`;
-  const result = await fetch(endpoint, {
+  const result = await fetch(shopifyStorefrontApiUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -138,4 +187,12 @@ export function formatMoney(amount: string | number, currencyCode = "INR") {
   } catch {
     return `${currencyCode} ${numericAmount.toFixed(0)}`;
   }
+}
+
+export function getShopifyAccountUrl(path = "/account") {
+  if (!shopifyStoreUrl) {
+    return path;
+  }
+
+  return `${shopifyStoreUrl}${path}`;
 }

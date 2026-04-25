@@ -66,8 +66,8 @@ export default function Footer({
           <div>
             <h4 className="mb-4 font-semibold text-gray-900">Customer Care</h4>
             <p className="mb-4 text-sm text-gray-500">
-              Shopping, registration, order tracking, and checkout stay connected to
-              Shopify for a smooth retail experience.
+              Account access, order tracking, and secure checkout stay connected to
+              Shopify so day-to-day store operations remain simple and reliable.
             </p>
             <div className="flex flex-col gap-3">
               <Link
@@ -90,7 +90,17 @@ export default function Footer({
           <p className="text-xs text-gray-400">
             &copy; {new Date().getFullYear()} Haram Exports. All rights reserved.
           </p>
-          <div className="text-xs text-gray-400">Powered by Next.js and Shopify Headless</div>
+          <p className="text-center text-xs text-gray-400 md:text-right">
+            Designed and developed by{" "}
+            <a
+              href="https://malik-innovations.vercel.app/"
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-gray-600 transition hover:text-gray-900"
+            >
+              Malik Innovations
+            </a>
+          </p>
         </div>
       </div>
     </footer>

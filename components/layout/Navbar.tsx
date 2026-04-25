@@ -101,21 +101,23 @@ export default function Navbar({ menuItems = defaultMenu }: NavbarProps) {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            {quickLinks.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="relative rounded-full p-2.5 text-gray-700 transition hover:bg-gray-100 hover:text-gray-900"
-                aria-label={item.label}
-              >
-                {item.icon}
-                {item.count ? (
-                  <span className="absolute -right-1 -top-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-gray-900 px-1 text-[10px] font-bold text-white">
-                    {item.count}
-                  </span>
-                ) : null}
-              </Link>
-            ))}
+            <div className="hidden items-center gap-2 lg:flex">
+              {quickLinks.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="relative rounded-full p-2.5 text-gray-700 transition hover:bg-gray-100 hover:text-gray-900"
+                  aria-label={item.label}
+                >
+                  {item.icon}
+                  {item.count ? (
+                    <span className="absolute -right-1 -top-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-gray-900 px-1 text-[10px] font-bold text-white">
+                      {item.count}
+                    </span>
+                  ) : null}
+                </Link>
+              ))}
+            </div>
 
             <button
               type="button"
@@ -147,7 +149,7 @@ export default function Navbar({ menuItems = defaultMenu }: NavbarProps) {
       </nav>
 
       <div
-        className={`fixed inset-x-0 top-20 z-[9998] border-t border-gray-100 bg-white shadow-[0_10px_20px_rgba(0,0,0,0.08)] lg:hidden ${
+        className={`fixed inset-x-0 top-20 z-[9998] max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-gray-100 bg-white shadow-[0_10px_20px_rgba(0,0,0,0.08)] lg:hidden ${
           isMobileMenuOpen ? "block" : "hidden"
         }`}
       >

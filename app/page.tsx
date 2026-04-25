@@ -113,7 +113,7 @@ export default async function Home() {
   const products = await getFeaturedProducts();
 
   return (
-    <div className="flex flex-col overflow-hidden bg-white">
+    <div className="flex flex-col overflow-x-hidden bg-white">
       <section className="relative flex min-h-[78vh] w-full items-center justify-center overflow-hidden bg-gray-900">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -240,29 +240,38 @@ export default async function Home() {
             </Link>
           </div>
 
-          <div className="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+          <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-4 sm:gap-4">
             {homepageCollections.map((category) => (
               <Link
                 key={category.href}
                 href={category.href}
-                className="group relative min-w-[280px] snap-start overflow-hidden rounded-2xl bg-gray-900 sm:min-w-[320px]"
+                className="group relative w-[calc(50%-0.375rem)] min-w-[150px] shrink-0 snap-start overflow-hidden rounded-2xl bg-gray-900 sm:w-[320px] sm:min-w-[320px]"
               >
                 <img
                   src={category.image}
                   alt={category.title}
-                  className="h-80 w-full object-cover opacity-70 transition-all duration-500 group-hover:scale-110 group-hover:opacity-50"
+                  className="h-56 w-full object-cover opacity-70 transition-all duration-500 group-hover:scale-110 group-hover:opacity-50 sm:h-80"
                 />
-                <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/70 via-black/20 to-transparent p-6 text-white">
-                  <h3 className="text-2xl font-bold">{category.title}</h3>
-                  <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/80">
+                <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/25 to-transparent p-3 text-white sm:p-6">
+                  <h3 className="text-base font-bold sm:text-2xl">{category.title}</h3>
+                  <p className="mt-2 max-w-xs text-xs leading-relaxed text-white/80 sm:text-sm">
                     {category.description}
                   </p>
-                  <span className="mt-4 inline-flex text-sm font-semibold uppercase tracking-[0.2em] text-white/90">
+                  <span className="mt-3 inline-flex text-[11px] font-semibold uppercase tracking-[0.18em] text-white/90 sm:mt-4 sm:text-sm sm:tracking-[0.2em]">
                     Explore
                   </span>
                 </div>
               </Link>
             ))}
+          </div>
+
+          <div className="mt-2 sm:hidden">
+            <Link
+              href="/collections"
+              className="inline-flex text-sm font-semibold text-gray-700 transition hover:text-gray-900"
+            >
+              View all collections
+            </Link>
           </div>
         </div>
       </section>
@@ -320,33 +329,49 @@ export default async function Home() {
           <div className="grid gap-8 md:grid-cols-3">
             {[
               {
-                title: "Create an Account",
+                title: "Customer Account Access",
                 description:
-                  "Use Shopify customer accounts for registration, saved addresses, and order history.",
+                  "Secure sign-in keeps saved addresses, order history, and profile details in one familiar customer area.",
                 href: "/account",
+                cta: "Open account",
               },
               {
-                title: "Search the Catalog",
+                title: "Live Catalog Search",
                 description:
-                  "Find products faster with a dedicated search page connected to your live Shopify data.",
+                  "Browse saddles, tack, and accessories faster with search connected directly to your current Shopify inventory.",
                 href: "/search",
+                cta: "Search products",
               },
               {
-                title: "Checkout Securely",
+                title: "Smooth Secure Checkout",
                 description:
-                  "Cart and checkout hand off to Shopify so inventory and orders stay managed in one place.",
+                  "Add items here and complete payment through Shopify so inventory, checkout, and order handling stay perfectly aligned.",
                 href: "/cart",
+                cta: "Review cart",
               },
             ].map((item) => (
               <Link
                 key={item.title}
                 href={item.href}
-                className="rounded-2xl border border-white/70 bg-white/80 p-8 transition hover:-translate-y-1 hover:shadow-xl"
+                className="rounded-2xl border border-white/70 bg-white/85 p-8 shadow-[0_16px_40px_rgba(15,23,42,0.06)] transition hover:-translate-y-1 hover:shadow-xl"
               >
                 <h2 className="text-2xl font-bold text-gray-900">{item.title}</h2>
                 <p className="mt-4 leading-relaxed text-gray-600">{item.description}</p>
-                <span className="mt-6 inline-flex text-sm font-semibold text-gray-900">
-                  Open page
+                <span className="mt-6 inline-flex items-center text-sm font-semibold text-gray-900">
+                  {item.cta}
+                  <svg
+                    className="ml-2 h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M7 17L17 7m0 0H9m8 0v8"
+                    />
+                  </svg>
                 </span>
               </Link>
             ))}

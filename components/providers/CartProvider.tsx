@@ -184,15 +184,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
-    const cartId = readStoredCartId();
+    const storedCartId = readStoredCartId();
 
-    if (!cartId) {
+    if (!storedCartId) {
       return;
     }
 
     let isMounted = true;
 
-    async function loadExistingCart() {
+    async function loadExistingCart(cartId: string) {
       try {
         const existingCart = await refreshCart(cartId);
 
@@ -215,7 +215,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
     }
 
-    loadExistingCart();
+    loadExistingCart(storedCartId);
 
     return () => {
       isMounted = false;
